@@ -1,0 +1,582 @@
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Responsive Accordion Page</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(120deg, #fdfbfb, #ebedee);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 26px; /* Dibesarkan dari 24px */
+            color: #333333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .accordion {
+            width: 100%;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            font-size: 18px; /* Dibesarkan dari 16px */
+            font-weight: 500;
+            color: #555555;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: #f0f0f0;
+        }
+
+        .accordion-header i {
+            font-size: 20px; /* Ukuran ikon juga dibesarkan */
+            color: #888888;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .accordion-header.active i {
+            color: #007bff;
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 20px;
+            font-size: 16px; /* Dibesarkan dari 15px */
+            color: #666666;
+            background-color: #fdfdfd;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .accordion-header {
+                font-size: 17px; /* Diperbesar untuk layar sedang */
+                padding: 15px 15px;
+            }
+            .accordion-content {
+                font-size: 15px;
+                padding: 15px;
+            }
+            .title {
+                font-size: 24px; /* Disesuaikan */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .accordion-header {
+                font-size: 16px;
+                padding: 12px 12px;
+            }
+            .accordion-content {
+                font-size: 14px;
+                padding: 12px 12px;
+            }
+            .title {
+                font-size: 22px;
+            }
+        }
+    </style>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.accordion-header');
+
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    header.classList.toggle('active');
+
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                    } else {
+                        content.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+
+
+<div class="title">PRICELIST VORENIST</div>
+<div style="margin-bottom: 20px;">
+<input id="searchInput" onkeyup="filterAccordion()" placeholder="Search..." style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px;" type="text"/>
+</div>
+<script>
+    function filterAccordion() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const accordionItems = document.querySelectorAll('.accordion-item');
+
+        accordionItems.forEach(item => {
+            const title = item.querySelector('.accordion-header span').textContent.toLowerCase();
+            if (title.includes(filter)) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+</script>
+<div class="accordion"><div class="accordion-item">
+<div class="accordion-header">
+<span>Alight Motion</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/> 
+        1 bulan: 9K <br> <br> 
+        	Private <br> 
+        	1 bulan: 12K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Amazon Prime Video</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br> 
+        	1 bulan 4 user: 10K <br> 
+        1 bulan 3 user: 12K <br> <br> 
+        Private <br> 
+  1 bulan: 21.5K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Apple Music</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        1 bulan: 10K <br/>
+        3 bulan: 30K <br/>
+        Acc from buyer
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Bstation (Bilibili)</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        1 bulan: 10K <br/>
+        3 bulan: 14K <br/>
+        1 tahun: 20K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Canva</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        1 hari: 1K <br/>
+        3 hari: 1.5K <br/>
+        7 hari: 3K <br/>
+        1 bulan: 6K <br/>
+        6 bulan: 12.5K <br/>
+        1 tahun: 15K <br/>
+        Lifetime: 14K <br/>
+        Designer +100P
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>CapCut</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/>
+        1 bulan: 15K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>ChatGPT</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/> 
+        1 minggu: 20K <br/> 
+        1 bulan: 35K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>DeepL</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+	Sharing <br> 
+        1 bulan: 12K <br/> <br> 
+        Private <br> 
+1 bulan: 17K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Disney</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        6U Plan Premium <br/>
+        1 bulan: 27K <br/>
+        1 hari: 5K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>DramaBox</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/>
+        1 minggu: 22K <br/>
+        1 bulan: 40K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Duolingo</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Family Plan <br/> 
+        1 bulan: 16K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>GagaOOLala</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        1 bulan: 12K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>GetContact</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Private <br/> 
+        1 bulan: 14K <br/> 
+        Akun dari buyer!
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Google Drive</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+	Lifetime (garansi 6 bulan) <br>
+        100GB: 40K <br/> 
+        300GB: 60K <br/> 
+        500GB: 100K 
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Grammarly</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/> 
+        1 bulan: 15K <br/> 
+        Private <br/> 
+        1 bulan: 48K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>HBO</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/> 
+        1 bulan: 14K
+    </div>
+</div>
+<div class="accordion-item">
+<div class="accordion-header">
+<span>iQIYI</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/>
+        Premium 1 bulan: 10K <br/>
+        Standard 3 bulan: 20K <br/>
+        1 tahun: 27K <br/><br/>
+
+        Private <br/>
+        1 bulan: 26K
+    </div>
+</div>
+<div class="accordion-item">
+	<div class="accordion-header">
+<span>Kilonotes</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Lifetime (Android): 10K
+    </div>
+    </div>
+    <div class="accordion-item">
+<div class="accordion-header">
+<span>Lightroom</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing 1 tahun: 10K<br/>
+        Android: 15K <br/>
+        iOS: 20K
+    </div>
+</div>
+
+<div class="accordion-item">
+<div class="accordion-header">
+<span>LokLok</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/> 
+        1 bulan: 9K <br/> 
+        3 bulan: 13K
+    </div>
+</div>
+
+<div class="accordion-item">
+<div class="accordion-header">
+<span>Microsoft 365</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Invite <br/> 
+        1 bulan: 12K <br/> 
+        3 bulan: 24K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Netflix</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing 1p1u <br/>
+        1 hari: 4K <br/>
+        1 minggu: 12K <br/>
+        1 bulan: 37K <br/><br/>
+
+        Sharing 1p2u <br/>
+        1 hari: 3K <br/><br/>
+
+        Semi-private <br/>
+        1 bulan: 45K
+    </div>
+</div>
+<div class="accordion-item">
+<div class="accordion-header">
+<span>Oldroll</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Lifetime (Android): 10K
+    </div>
+</div>
+<div class="accordion-item">
+<div class="accordion-header">
+<span>Picsart</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/> 
+        1 bulan: 10K <br> <br> 
+        	Private <br> 
+        	1 bulan: 15K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>RCTI+</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/> 
+        1 bulan: 18K <br/> 
+        Private <br/> 
+        1 bulan: 26K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Remini</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing Web <br/>
+        1 bulan: 9K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Scribd</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Private <br/> 
+        1 bulan: 15K <br/> 
+        Sharing <br/> 
+        1 bulan: 10K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Spotify</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Family Plan <br/>
+        1 bulan: 16K <br/>
+        2 bulan: 21K <br/><br/>
+
+        Individual Plan <br/>
+        1 bulan: 22K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Vidio</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Priv All Device <br/>
+        1 bulan: 29K <br/><br/>
+
+        Share All Device <br/>
+        1 bulan: 20K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Vision+</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sport Private <br/>
+        1 bulan: 22K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Viu</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Priv Anlim <br/> 
+        1 bulan: 8K <br/> 
+        3 bulan: 13K <br/> 
+        12 bulan: 16K
+    </div>
+</div>
+
+<div class="accordion-item">
+<div class="accordion-header">
+<span>VSCO+</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing 1 tahun <br/>
+        Android: 15K <br/>
+        iOS: 20K
+    </div>
+</div>
+    <div class="accordion-item">
+<div class="accordion-header">
+<span>Wattpad</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing 1 tahun: 10K
+    </div>
+</div>
+<div class="accordion-item">
+<div class="accordion-header">
+<span>WeTV</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing <br/>
+        1 bulan: 10K <br/>
+        1 bulan 3 user: 16K <br/><br/>
+
+        Private <br/>
+        1 bulan: 30K
+    </div>
+</div>
+    <div class="accordion-item">
+<div class="accordion-header">
+<span>Wibuku</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Sharing 1 tahun: 12K
+    </div>
+</div>
+<div class="accordion-item">
+<div class="accordion-header">
+<span>YouTube</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        Famplan <br/> 
+        1 bulan: 9K <br/>
+        Indplan <br/> 
+        1 bulan: 12K
+    </div>
+</div><div class="accordion-item">
+<div class="accordion-header">
+<span>Youku</span>
+<i class="fas fa-chevron-down"></i>
+</div>
+<div class="accordion-content">
+        1 bulan: 8K <br/>
+        3 bulan: 16K <br/>
+        1 tahun: 24K
+    </div>
+</div></div>
+</div>
+</body>
+</html>
